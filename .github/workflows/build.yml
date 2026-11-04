@@ -36,7 +36,8 @@ jobs:
             libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
             libsdl2-ttf-dev libportmidi-dev libswscale-dev \
             libavformat-dev libavcodec-dev zlib1g-dev libffi-dev \
-            libssl-dev unzip openjdk-17-jdk wget
+            libssl-dev unzip openjdk-17-jdk wget \
+            autoconf automake libtool pkg-config
 
       - name: Install Android SDK and required NDK
         run: |
