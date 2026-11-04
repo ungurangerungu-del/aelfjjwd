@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+      JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
       ANDROID_HOME: /usr/local/lib/android/sdk
       ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      ANDROID_NDK: /usr/local/lib/android/sdk/ndk/25.2.9519653
       ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/25.2.9519653
       ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/25.2.9519653
+      ANDROIDNDK: /usr/local/lib/android/sdk/ndk/25.2.9519653
 
     steps:
       - name: Checkout repository
@@ -67,10 +70,10 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install "cython==0.29.33" "buildozer==1.5.0"
 
-      - name: Build APK
+      - name: Build APK with debug log
         run: |
           export PATH="/usr/local/lib/android/sdk/platform-tools:/usr/local/lib/android/sdk/build-tools/34.0.0:$PATH"
-          buildozer -v android debug
+          buildozer -v android debug > build.log 2>&1 || { tail -n 200 build.log; exit 1; }
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v5
