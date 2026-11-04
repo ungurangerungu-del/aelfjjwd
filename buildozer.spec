@@ -14,4 +14,3 @@ android.permissions = INTERNET, ACCESS_NETWORK_STATE, ACCESS_WIFI_STATE
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
-android.sdk = 30
